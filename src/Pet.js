@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Pet({ name, animal, breed }) {
   // return React.createElement("div", {}, [
@@ -7,11 +7,11 @@ export default function Pet({ name, animal, breed }) {
   //   React.createElement("h3", {}, breed)
   // ]);
 
-  return(
+  return (
     <div>
       <h1> {name} </h1>
       <h2> {animal} </h2>
       <h3> {breed} </h3>
     </div>
-  )
-};
+  );
+}
