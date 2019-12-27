@@ -1,6 +1,23 @@
 import React, { useState } from "react";
 import { ANIMALS } from "@frontendmasters/pet";
 
+const Select = ({ id, onUpdate, options, value, ...props }) => {
+  return (
+    <select
+      {...props}
+      id={id}
+      value={value}
+      onChange={e => onUpdate(e.target.value)}
+      onBlur={e => onUpdate(e.target.value)}
+    >
+      <option>All</option>
+      {options.map(option => (
+        <option key={option} value={option}>{` ${option} `}</option>
+      ))}
+    </select>
+  );
+};
+
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
   const [animal, setAnimal] = useState("dog");
@@ -22,29 +39,23 @@ const SearchParams = () => {
 
         <label htmlFor="animal">
           Animal
-          <select>
-            id="animal" value={animal}
-            onChange={e => setAnimal(e.target.value)}
-            onBlur={e => setAnimal(e.target.value)}
-            <option>All</option>
-            {ANIMALS.map(animal => (
-              <option key={animal} value={animal}> {animal} </option>
-            ))}
-          </select>
+          <Select
+            id="animal"
+            value={animal}
+            onUpdate={setAnimal}
+            options={ANIMALS}
+          />
         </label>
 
         <label htmlFor="breed">
           Breed
-          <select>
-            id="breed" value={breed}
-            onChange={e => setBreed(e.target.value)}
-            onBlur={e => setBreed(e.target.value)}
-            disabled={breeds.length === 0}
-            <option>All</option>
-            {breeds.map(breed => (
-              <option key={breed} value={breed}> {breed} </option>
-            ))}
-          </select>
+          <Select
+            id="breed"
+            value={breed}
+            onUpdate={setBreed}
+            // disabled={breeds.length === 0}
+            options={breeds}
+          />
         </label>
         <button>Submit</button>
       </form>
